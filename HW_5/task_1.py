@@ -8,17 +8,17 @@
 
 from collections import namedtuple
 
-N = int(input('Введите количество предприятий: '))
+n = int(input('Введите количество предприятий: '))
 
-ENTERPRISE = namedtuple('Enterprise', 'name, quarter_1 quarter_2 quarter_3 '
+Enterprise = namedtuple('Enterprise', 'name, quarter_1 quarter_2 quarter_3 '
                                       'quarter_4')
 
 enterprise_profit = {}
 
-for i in range(N):
+for i in range(n):
     enterprise_name = input('Введите название предприятия: ')
     profit_lst = input('Введите прибыль за каждый квартал через пробел: ').split(' ')
-    enterprise = ENTERPRISE(
+    enterprise = Enterprise(
         name=enterprise_name,
         quarter_1=int(profit_lst[0]),
         quarter_2=int(profit_lst[1]),
@@ -29,13 +29,13 @@ for i in range(N):
     enterprise_profit[enterprise.name] = enterprise.quarter_1 + enterprise.quarter_2 + \
                                          enterprise.quarter_3 + enterprise.quarter_4
 
-AVG = sum(enterprise_profit.values()) / N  # средняя прибыль в год для всех предприятий
+AVG = sum(enterprise_profit.values()) / n  # средняя прибыль в год для всех предприятий
 
 more_avg = []
 less_avg = []
 
 for j in enterprise_profit:
-    if enterprise_profit[j] >= AVG:
+    if enterprise_profit[j] > AVG:
         more_avg.append(j)
     else:
         less_avg.append(j)
